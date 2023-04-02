@@ -1,0 +1,35 @@
+{
+  "name": "crypto-backend",
+  "version": "1.0.0",
+  "description": "This is backend for Crypto Application",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "swagger-autogen": "node swagger.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vkyplr/crypto-backend.git"
+  },
+  "author": "Vikas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vkyplr/crypto-backend/issues"
+  },
+  "homepage": "https://github.com/vkyplr/crypto-backend#readme",
+  "dependencies": {
+    "@types/yup": "^0.32.0",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.3",
+    "swagger-ui-express": "^4.6.2",
+    "web3": "^1.9.0",
+    "yup": "^1.0.2"
+  },
+  "devDependencies": {
+    "swagger-autogen": "^2.23.1"
+  }
+}
