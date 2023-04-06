@@ -18,6 +18,15 @@ const userValidator = yup
   })
   .required();
 
+const updateUserValidator = yup
+  .object({
+    first_name: yup.string().trim().required(),
+    last_name: yup.string().trim().required(),
+    phone: yup.string().trim().required(),
+    email: yup.string().required().email(),
+  })
+  .required();
+
 const loginValidator = yup
   .object({
     email: yup.string().required().email(),
@@ -25,4 +34,4 @@ const loginValidator = yup
   })
   .required();
 
-module.exports = { userValidator, loginValidator };
+module.exports = { userValidator, loginValidator, updateUserValidator };

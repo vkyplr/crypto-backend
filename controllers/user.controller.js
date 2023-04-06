@@ -1,15 +1,17 @@
-const Web3 = require("web3");
-
 const User = require("../models/user");
-const { userValidator, loginValidator } = require("../config/validators");
+const {
+  userValidator,
+  loginValidator,
+  updateUserValidator,
+} = require("../config/validators");
 const {
   generateHash,
   generateResponse,
   compareHashWithPassword,
   generateToken,
+  generateBlockchainAccount,
+  getWalletBalanceFromBlockchain,
 } = require("../config/helper");
-
-const web3 = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545");
 
 exports.register = async (req, res) => {
   /*
@@ -35,7 +37,7 @@ exports.register = async (req, res) => {
       );
     }
 
-    const account = web3.eth.accounts.create();
+    const account = generateBlockchainAccount();
     const { address, privateKey } = account;
 
     let userData = { ...req.body };
@@ -75,7 +77,7 @@ exports.login = async (req, res) => {
         in: 'body',
         type: 'object',
         description: 'User Login Credentials',
-        schema:  { $email: "vikas@gmail.com", $password: "Strong@Password1" }
+        schema:  { $email: "vkyplr@gmail.com", $password: "Password@1" }
     }
 */
   try {
@@ -113,11 +115,59 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.getUserData = (req, res) => {
+exports.updateUser = async (req, res) => {
+  /*
+    #swagger.tags = ["User"],
+    #swagger.parameters['body'] = {
+        in: 'body',
+        type: 'object',
+        description: 'Update User Data',
+        schema:  { $ref: "#/definitions/updateUser" }
+    }
+*/
+  try {
+    updateUserValidator.validateSync(req.body, {
+      abortEarly: false,
+      stripUnknown: true,
+    });
+    let updatedUser = await User.findOneAndUpdate(
+      { _id: req.user._id },
+      {
+        $set: {
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
+          email: req.body.email,
+          phone: req.body.phone,
+        },
+      },
+      {
+        fields: {
+          first_name: 1,
+          last_name: 1,
+          email: 1,
+          phone: 1,
+          walletAddress: 1,
+        },
+        new: true,
+      }
+    );
+    return res.json(generateResponse({ data: updatedUser }));
+  } catch (e) {
+    return res
+      .status(400)
+      .json(generateResponse({ message: "Error", errors: e.errors }));
+  }
+};
+
+exports.getUserData = async (req, res) => {
   /*
     #swagger.tags = ["User"],
 */
-  return res.send(generateResponse({ data: req.user }));
+
+  const balance = await getWalletBalanceFromBlockchain(req.user.walletAddress);
+  return res.send(
+    generateResponse({ data: { ...req.user._doc, walletBalance: balance } })
+  );
 };
 
 exports.logout = (req, res) => {
