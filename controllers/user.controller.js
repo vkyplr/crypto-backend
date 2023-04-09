@@ -116,13 +116,13 @@ exports.login = async (req, res) => {
 };
 
 exports.updateUser = async (req, res) => {
-  /*
+/*
     #swagger.tags = ["User"],
     #swagger.parameters['body'] = {
         in: 'body',
         type: 'object',
         description: 'Update User Data',
-        schema:  { $ref: "#/definitions/updateUser" }
+        schema:  { $ref: "#/definitions/Update User" }
     }
 */
   try {

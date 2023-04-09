@@ -15,12 +15,17 @@ const doc = {
       $email: "vikas@gmail.com",
       $password: "Strong@Password",
     },
-    updateUser: {
+    "Update User": {
       $first_name: "Vikas",
       $last_name: "Purohit",
       $phone: "9999999999",
       $email: "vikas@gmail.com",
     },
+    "Transaction": {
+      $address: "0xsdfufiwert89e5ugfuhgu7t5r79ty75ygh",
+      $amount: 1
+    },
+
   },
 };
 

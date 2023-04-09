@@ -1,5 +1,6 @@
 const router = require("express").Router();
 
+const { sendMoney, requestMoney } = require("../controllers/transaction.controller");
 const {
   register,
   login,
@@ -17,5 +18,9 @@ router
   .post(register)
   .get(verifyToken, getUserData)
   .put(verifyToken, updateUser);
+
+
+router.post("/send-money", verifyToken, sendMoney);
+router.post("/request-money", verifyToken, requestMoney);
 
 module.exports = router;
