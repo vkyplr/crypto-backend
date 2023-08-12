@@ -11,6 +11,7 @@ const {
   CONTRACT_ADDRESS,
   BLOCKCHAIN_URL,
   TOKEN_EXPIRATION_TIME,
+  ADMIN_PRIVATE_KEY,
 } = process.env;
 const web3 = new Web3(BLOCKCHAIN_URL);
 const contract = new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
@@ -35,3 +36,17 @@ exports.getWalletBalanceFromBlockchain = async (walletAddress) => {
     await contract.methods.balanceOf(walletAddress).call()
   );
 };
+
+exports.getAccountFromPrivateKey = (privateKey) =>
+  web3.eth.accounts.privateKeyToAccount(privateKey);
+exports.getNonce = async (address) =>
+  await web3.eth.getTransactionCount(address);
+exports.getGasPrice = async () => await web3.eth.getGasPrice();
+exports.toHex = (s) => web3.utils.toHex(s);
+exports.getTxData = (address, amount) =>
+  contract.methods.transfer(address, amount).encodeABI();
+exports.contractAddress = CONTRACT_ADDRESS;
+exports.signTransaction = async (transaction, key) =>
+  await web3.eth.accounts.signTransaction(transaction, key);
+exports.sendSignedTransaction = async (rawTransaction) =>
+  await web3.eth.sendSignedTransaction(rawTransaction);

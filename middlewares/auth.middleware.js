@@ -20,7 +20,9 @@ exports.verifyToken = async (req, res, next) => {
         if (err) return res.sendStatus(401);
         else {
           User.findOne({ _id: data.id })
-            .select("first_name last_name email phone walletAddress created")
+            .select(
+              "first_name last_name email phone walletAddress walletPrivateKey created"
+            )
             .then((user) => {
               req.user = user;
               next();

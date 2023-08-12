@@ -71,6 +71,7 @@ exports.register = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
+  console.log(req.body);
   /*
     #swagger.tags = ["Authentication"],
     #swagger.parameters['body'] = {
@@ -116,7 +117,7 @@ exports.login = async (req, res) => {
 };
 
 exports.updateUser = async (req, res) => {
-/*
+  /*
     #swagger.tags = ["User"],
     #swagger.parameters['body'] = {
         in: 'body',
