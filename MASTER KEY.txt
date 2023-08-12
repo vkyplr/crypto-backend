@@ -1,0 +1,5 @@
+Master Key: gold vanish hood lift forget embrace lawsuit barrel plastic mass hazard boost
+Metamask Private Key: e52e1e9fad801536067d95ef622ed75f70475c8d020cb906f2690c3b26c2f053
+Wallet Address: 0x68D08C13b69004d18301C88ec8429c3cc23acD55
+Contract Address on BSC Testnet: 0x933f14380e2dd5302eb98fd66da8434cf770a96f
+Deployment Transaction Hash: 0x5be4cf7c3cf9fad8f9fbf3521486a8e302b845405f207f027613a6d90e51d3b8
